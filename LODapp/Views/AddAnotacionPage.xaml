@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+             xmlns:local="clr-namespace:LODapp.Resources" 
+             xmlns:viewmodels="clr-namespace:LODapp.ViewModels"
+             x:Class="LODapp.Views.AddAnotacionPage"
+             x:Name="AddAnotPage"
+             x:DataType="viewmodels:AddAnotacionViewModel"
+             Title="Añadir Anotación"
+             BackgroundColor="White"
+             >
+    <Shell.BackButtonBehavior>
+        <BackButtonBehavior Command="{Binding BackCommand}"/>
+    </Shell.BackButtonBehavior>
+    <ContentPage.BindingContext>
+        <viewmodels:AddAnotacionViewModel/>
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <Frame Padding="20">
+            <StackLayout>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Image Grid.Row="0" Grid.Column="0" HeightRequest="40" WidthRequest="40" Source="{local:ImageResource LODapp.Content.Images.contratoGeneric.png}" />
+                    <Label Text="Crear Anotación" TextColor="DarkOrange" FontAttributes="Bold" FontSize="Medium" Grid.Column="2" Grid.ColumnSpan="3" Grid.Row="0"/>
+                    <Label Text="Título:" TextColor="DarkOrange" FontAttributes="Bold" FontSize="Small" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="3"/>
+                    <Entry Text="{Binding TituloAnotacion}" Placeholder="Título" PlaceholderColor="LightGray" FontSize="Small" Grid.Column="0" Grid.ColumnSpan="4" Grid.Row="4"/>
+                    <Label Text="Cuerpo:" TextColor="DarkOrange" FontAttributes="Bold" FontSize="Small" Grid.Column="0" Grid.ColumnSpan="4" Grid.Row="5"/>
+                    <Editor Text="{Binding CuerpoAnotacion}" Placeholder="Cuerpo" PlaceholderColor="LightGray" FontSize="Small" Grid.Column="0" Grid.ColumnSpan="4"  Grid.Row="6"/>
+                    <Label Text="Tipo Comunicación:" TextColor="DarkOrange" FontAttributes="Bold" FontSize="Small" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="9"/>
+                    <Picker ItemsSource="{Binding ListTipoComunicacion, Mode=TwoWay}" ItemDisplayBinding="{Binding Nombre}" SelectedItem="{Binding selectedTipoComunicacion}" Title="Seleccione un Tipo de Comunicación" FontSize="Small" Grid.Column="3" Grid.ColumnSpan="4" Grid.Row="9"/>
+                    <Label Text="Subtipo Comunicación:" TextColor="DarkOrange" FontAttributes="Bold" FontSize="Small" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="11"/>
+                    <Picker ItemsSource="{Binding ListSubTipoComunicacion, Mode=TwoWay}" ItemDisplayBinding="{Binding Nombre}" SelectedItem="{Binding selectedSubTipoComunicacion}" Title="Seleccione un Subtipo de Comunicación" FontSize="Small" Grid.Column="3" Grid.ColumnSpan="4" Grid.Row="11"/>
+                    <Label Text="Solicita Respuesta:" TextColor="DarkOrange" FontAttributes="Bold" FontSize="Small" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="12"/>
+                    <CheckBox IsChecked="{Binding SolicitaRespuesta, Mode=TwoWay}" Grid.Column="3" Grid.ColumnSpan="4" Grid.Row="12"/>
+                    <Label Text="Fecha Respuesta:" TextColor="DarkOrange" FontAttributes="Bold" FontSize="Small" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="13"/>
+                    <DatePicker  Date="{Binding FechaRespuesta}" Grid.Column="3" Grid.ColumnSpan="4" Grid.Row="13" IsEnabled="{Binding SolicitaRespuesta}"/>
+                    <Label Text="Receptor Principal:" TextColor="DarkOrange" FontAttributes="Bold" FontSize="Small" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="14"/>
+                    <Picker ItemsSource="{Binding ListReceptores}" SelectedItem="{Binding selectedReceptor}" ItemDisplayBinding="{Binding Usuario}" Title="Seleccione un Receptor(Opcional)" FontSize="Small" Grid.Column="3" Grid.ColumnSpan="4" Grid.Row="14"/>
+                    
+                </Grid>
+                <Button CornerRadius="10" Text="Crear" TextColor="White" BackgroundColor="Green" Command="{Binding CreateAnotacionCommand}"/>
+            </StackLayout>
+        </Frame>
+    </ContentPage.Content>
+</ContentPage>

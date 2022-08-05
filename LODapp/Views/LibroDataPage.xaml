@@ -1,0 +1,236 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="LODapp.Views.LibroDataPage"
+             xmlns:fontAwesome="clr-namespace:FontAwesome"
+             x:Name="LibroDetailsPage"
+             xmlns:local="clr-namespace:LODapp.Resources" xmlns:viewmodels="clr-namespace:LODapp.ViewModels" xmlns:xct="http://xamarin.com/schemas/2020/toolkit" xmlns:models="clr-namespace:LODapp.Models"
+             x:DataType="viewmodels:LibroDataViewModel"
+             Title="{Binding Title}"
+             BackgroundColor="White">
+    <ContentPage.BindingContext>
+        <viewmodels:LibroDataViewModel/>
+    </ContentPage.BindingContext>
+    <Shell.BackButtonBehavior>
+        <BackButtonBehavior Command="{Binding BackCommand}"/>
+    </Shell.BackButtonBehavior>
+    
+    <ContentPage.Content>
+        <AbsoluteLayout>
+            <Grid AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All">
+                <xct:TabView TabStripPlacement="Bottom"
+                     TabStripBackgroundColor="White"
+                     TabStripHeight="60"
+                     TabIndicatorColor="DarkOrange"
+                     TabContentBackgroundColor="Transparent">
+                    <xct:TabViewItem Text="{StaticResource ContratoIcon}" FontFamily="FAS" FontSize="20" FontSizeSelected="25" TextColor="DarkGray" TextColorSelected="DarkOrange">
+                        <StackLayout Padding="20">
+                            <Label IsVisible="false" Text="{Binding IdLibro}"/>
+                                <Label Padding="2"
+                                    HorizontalOptions="Start"
+                                       FontSize="Medium" FontAttributes="Bold" FontFamily="FAS">
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="Anotaciones" TextColor="DarkOrange"/>
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+                                <SearchBar VerticalOptions="Center"
+                                            Placeholder="Buscar Anotación" TextColor="DarkSlateGray" PlaceholderColor="LightSlateGray" BackgroundColor="Transparent" FontSize="Small" x:Name="searchBarAnotacion"
+                                            SearchCommand="{Binding SearchCommand}"
+                                            SearchCommandParameter="{Binding Text, Source={x:Reference searchBarAnotacion}}"
+                                           >
+                                </SearchBar>
+                                
+                                <Grid Padding="0,5,0,5">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"></ColumnDefinition>
+                                        <ColumnDefinition Width="*"></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+                                <Button Grid.Row="0" Grid.Column="0" CornerRadius="10" TextColor="Black" BorderWidth="1" Command="{Binding GetPrincipalCommand}" FontAttributes="Bold" Text="Bandeja Principal" HeightRequest="35" WidthRequest="50" BackgroundColor="White" BorderColor="{Binding Color, Mode=TwoWay}" FontSize="Micro"/>
+                                <Button Grid.Row="0" Grid.Column="1" CornerRadius="10" TextColor="Black" BorderWidth="1" Command="{Binding GetMisPublicacionesCommand}" FontAttributes="Bold" Text="Mis Publicaciones" HeightRequest="35" WidthRequest="50" BackgroundColor="White" BorderColor="{Binding Color, Mode=TwoWay}" FontSize="Micro"/>
+                                <Button Grid.Row="1" Grid.Column="0" CornerRadius="10" TextColor="Black" BorderWidth="1" Command="{Binding GetMisBorradoresCommand}" FontAttributes="Bold" Text="Mis Borradores" HeightRequest="35" WidthRequest="50" BackgroundColor="White" BorderColor="{Binding Color, Mode=TwoWay}" FontSize="Micro"/>
+                                <Button Grid.Row="1" Grid.Column="1" CornerRadius="10" TextColor="Black" BorderWidth="1" Command="{Binding GetMisDestacadasCommand}" FontAttributes="Bold" Text="Mis Destacadas" HeightRequest="35" WidthRequest="50" BackgroundColor="White" BorderColor="{Binding Color, Mode=TwoWay}" FontSize="Micro"/>
+                                <Button Grid.Row="2" Grid.Column="0" CornerRadius="10" TextColor="Black" BorderWidth="1" Command="{Binding GetNombradoEnCommand}" FontAttributes="Bold" Text="Nombrado En" HeightRequest="35" WidthRequest="50" BackgroundColor="White" BorderColor="{Binding Color, Mode=TwoWay}" FontSize="Micro"/>
+                                <Button Grid.Row="2" Grid.Column="1" CornerRadius="10" TextColor="Black" BorderWidth="1" Command="{Binding GetMisFirmasPendientesCommand}" FontAttributes="Bold" Text="Mis Firmas Pendientes" HeightRequest="35" WidthRequest="50" BackgroundColor="White" BorderColor="{Binding Color, Mode=TwoWay}" FontSize="Micro"/>
+                                <Button Grid.Row="3" Grid.Column="0" CornerRadius="10" TextColor="Black" BorderWidth="1" Text="Mis Resp. pendientes" Command="{Binding GetMisRespPendientesCommand}" FontAttributes="Bold" HeightRequest="35" WidthRequest="50" BackgroundColor="White" BorderColor="{Binding Color, Mode=TwoWay}" FontSize="Micro"/>
+                                </Grid>
+                                <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" BackgroundColor="White" Color="DarkOrange"/>
+                            <Frame BackgroundColor="WhiteSmoke" CornerRadius="10">
+                                <CollectionView
+                                            SelectedItem="{Binding selectedAnotacion, Mode=TwoWay}"
+                                            ItemSizingStrategy="MeasureAllItems"
+                                            BackgroundColor="Transparent"
+                                            ItemsSource="{Binding Anotaciones}"
+                                            SelectionMode="None"
+                                            VerticalScrollBarVisibility="Always"
+                                            VerticalOptions="Start"
+                                            RemainingItemsThreshold="1"
+                                            RemainingItemsThresholdReachedCommand="{Binding DelayLoadMoreCommand}"
+                                            
+                                    >
+                                    <CollectionView.EmptyView>
+                                        <StackLayout Padding="12">
+                                            <Label HorizontalOptions="Center" FontSize="Medium" Text="Sin Anotaciones para Mostrar"></Label>
+                                        </StackLayout>
+                                    </CollectionView.EmptyView>
+                                    <CollectionView.ItemTemplate>
+                                        <DataTemplate x:DataType="models:LOD_Anotaciones">
+                                            <Grid Padding="5">
+                                                <Frame BorderColor="{Binding Source={x:Reference LibroDetailsPage},Path=BindingContext.Color}" BackgroundColor="White" CornerRadius="10">
+                                                    <StackLayout>
+                                                        <StackLayout.GestureRecognizers>
+                                                            <TapGestureRecognizer Command="{Binding Source={x:Reference LibroDetailsPage},Path=BindingContext.DetailsCommand}"
+                                                                      CommandParameter="{Binding IdAnotacion}"/>
+                                                        </StackLayout.GestureRecognizers>
+                                                        <Grid>
+                                                            <Grid.RowDefinitions>
+                                                                <RowDefinition Height="20" />
+                                                            </Grid.RowDefinitions>
+
+                                                            <Grid.ColumnDefinitions>
+                                                                <ColumnDefinition Width="10*"></ColumnDefinition>
+                                                                <ColumnDefinition Width="30*"></ColumnDefinition>
+                                                                <ColumnDefinition Width="30*"></ColumnDefinition>
+                                                                <ColumnDefinition Width="*"></ColumnDefinition>
+                                                            </Grid.ColumnDefinitions>
+                                                            <Label IsVisible="{Binding DestacadaOn}"  Text="{x:Static fontAwesome:FontAwesomeIcons.Star}" TextColor="Yellow" FontSize="Medium" FontFamily="FAS" Grid.Row="0" Grid.Column="0"></Label>
+                                                            <Label IsVisible="{Binding DestacadaOff}"  Text="{x:Static fontAwesome:FontAwesomeIcons.Star}" TextColor="Black" FontSize="Medium" FontFamily="FAR" Grid.Row="0" Grid.Column="0"></Label>
+                                                            <Label VerticalOptions="Center"
+                                                                                FontSize="Medium" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" FontAttributes="Bold">
+                                                                <Label.FormattedText>
+                                                                    <FormattedString>
+                                                                        <Span Text="# " TextColor="Black"/>
+                                                                        <Span Text="{Binding Correlativo}" TextColor="Black"/>
+                                                                        <Span Text=" - " TextColor="Black"/>
+                                                                        <Span Text="{Binding Titulo}" TextColor="Black"/>
+                                                                    </FormattedString>
+                                                                </Label.FormattedText>
+                                                            </Label>
+
+                                                        </Grid>
+                                                        <Grid>
+                                                            <Grid.RowDefinitions>
+                                                                <RowDefinition Height="Auto" />
+                                                                <RowDefinition Height="Auto" />
+                                                            </Grid.RowDefinitions>
+
+                                                            <Grid.ColumnDefinitions>
+                                                                <ColumnDefinition Width="*"></ColumnDefinition>
+                                                                <ColumnDefinition Width="*"></ColumnDefinition>
+                                                                <ColumnDefinition Width="*"></ColumnDefinition>
+                                                                <ColumnDefinition Width="*"></ColumnDefinition>
+                                                            </Grid.ColumnDefinitions>
+                                                            <Label VerticalOptions="Center"
+                                                                        FontSize="Small" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5">
+                                                                <Label.FormattedText>
+                                                                    <FormattedString>
+                                                                        <Span Text="Fecha Pub: " FontAttributes="Bold" TextColor="Black"/>
+                                                                        <Span Text="{Binding FechaPub}" TextColor="Black"/>
+                                                                    </FormattedString>
+                                                                </Label.FormattedText>
+                                                            </Label>
+                                                            <Label VerticalOptions="Center"
+                                                                        FontSize="Small" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
+                                                                <Label.FormattedText>
+                                                                    <FormattedString>
+                                                                        <Span Text="Estado: " FontAttributes="Bold" TextColor="Black"/>
+                                                                    </FormattedString>
+                                                                </Label.FormattedText>
+                                                            </Label>
+                                                            <Label IsVisible="{Binding Borrador}" WidthRequest="8" Text="{x:Static fontAwesome:FontAwesomeIcons.Circle}" TextColor="Yellow" FontSize="Medium" FontFamily="FAS" Grid.Column="1" Grid.ColumnSpan="1" Grid.Row="1"></Label>
+                                                            <Label IsVisible="{Binding Publicada}" WidthRequest="8" Text="{x:Static fontAwesome:FontAwesomeIcons.Circle}" TextColor="Green" FontSize="Medium" FontFamily="FAS" Grid.Column="1" Grid.ColumnSpan="1" Grid.Row="1"></Label>
+                                                            <Label IsVisible="{Binding PendienteFirma}" WidthRequest="8" Text="{x:Static fontAwesome:FontAwesomeIcons.Circle}" TextColor="Orange" FontSize="Medium" FontFamily="FAS" Grid.Column="1" Grid.ColumnSpan="1" Grid.Row="1"></Label>
+                                                            <Label VerticalOptions="Center"
+                                                                        FontSize="Small" Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="4">
+                                                                <Label.FormattedText>
+                                                                    <FormattedString>
+                                                                        <Span Text="Rem: " FontAttributes="Bold" TextColor="Black"/>
+                                                                        <Span Text="{Binding UsuarioRemitente}" TextColor="Black"/>
+                                                                    </FormattedString>
+                                                                </Label.FormattedText>
+                                                            </Label>
+                                                        </Grid>
+                                                    </StackLayout>
+                                                </Frame>
+                                            </Grid>
+                                        </DataTemplate>
+                                    </CollectionView.ItemTemplate>
+                                </CollectionView>
+                            </Frame>
+                                
+                            </StackLayout>
+                    </xct:TabViewItem>
+                    <xct:TabViewItem Text="{x:Static fontAwesome:FontAwesomeIcons.Info}" FontFamily="FAS" FontSize="20" FontSizeSelected="25" TextColor="DarkGray" TextColorSelected="DarkOrange">
+                        <StackLayout Padding="20">
+                            <Frame BorderColor="DarkOrange" Padding="20" CornerRadius="10" HeightRequest="300">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"></ColumnDefinition>
+                                        <ColumnDefinition Width="*"></ColumnDefinition>
+                                        <ColumnDefinition Width="*"></ColumnDefinition>
+                                        <ColumnDefinition Width="*"></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+                                    <Label Text="Información Libro:" TextColor="Black" FontFamily="FAS" FontAttributes="Bold" FontSize="Medium" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5"/>
+                                    <Label Text="Estado:" TextColor="Black" FontAttributes="Bold" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="2"/>
+                                    <Image Grid.Column="3" Grid.Row="2" WidthRequest="20" Source="{local:ImageResource LODapp.Content.Images.redCircle_Generic.png}" IsVisible="{Binding Cerrado}"/>
+                                    <Label Text="Cerrado" TextColor="DarkSlateGray" FontAttributes="Bold" Grid.Column="4" Grid.ColumnSpan="5" Grid.Row="2" IsVisible="{Binding Cerrado}" />
+                                    <Image Grid.Column="4" Grid.Row="2" WidthRequest="20" Source="{local:ImageResource LODapp.Content.Images.yellowCircle_Generic.png}" IsVisible="{Binding Creado}"/>
+                                    <Label Text="Creado" TextColor="DarkSlateGray" FontAttributes="Bold" Grid.Column="4" Grid.ColumnSpan="5" Grid.Row="2" IsVisible="{Binding Creado}" />
+                                    <Image Grid.Column="3" Grid.Row="2" WidthRequest="20" Source="{local:ImageResource LODapp.Content.Images.greenCircle_Generic.png}" IsVisible="{Binding Aperturado}" />
+                                    <Label Text="Aperturado" TextColor="DarkSlateGray" FontAttributes="Bold" Grid.Column="4" Grid.ColumnSpan="5" Grid.Row="2" IsVisible="{Binding Aperturado}"/>
+
+                                    <Label Text="Nombre Contrato:" TextColor="Black" FontAttributes="Bold" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="3" />
+                                    <Label Text="{Binding Libro.nombreContrato, Mode=TwoWay}" TextColor="DarkSlateGray" Grid.Column="4" Grid.ColumnSpan="5" Grid.Row="3"/>
+                                    <Label Text="Usuario Apertura:" TextColor="Black" FontAttributes="Bold" Grid.Column="0" Grid.ColumnSpan="4" Grid.Row="5"/>
+                                    <Label Text="{Binding Libro.Usuario_Apertura, Mode=TwoWay}" TextColor="DarkSlateGray" Grid.Column="4" Grid.ColumnSpan="5" Grid.Row="5"/>
+                                    <Label Text="Fecha Apertura:" FontAttributes="Bold" TextColor="Black" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="6"/>
+                                    <Label Text="{Binding Libro.FechaApertura, Mode=TwoWay}" TextColor="DarkSlateGray" Grid.Column="4" Grid.ColumnSpan="5" Grid.Row="6"/>
+                                    <Label Text="Usuario Cierre:" FontAttributes="Bold" TextColor="Black" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="7"/>
+                                    <Label Text="{Binding Libro.FechaCierre, Mode=TwoWay}" TextColor="DarkSlateGray" Grid.Column="4" Grid.ColumnSpan="5" Grid.Row="7"/>
+                                    <Label Text="Fecha Cierre:" FontAttributes="Bold" TextColor="Black" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="8"/>
+                                    <Label Text="{Binding Libro.FechaCierre, Mode=TwoWay}" TextColor="DarkSlateGray" Grid.Column="4" Grid.ColumnSpan="5" Grid.Row="8"/>
+                                    <Label Text="Tipo Libro:" FontAttributes="Bold" TextColor="Black" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="9"/>
+                                    <Label Text="{Binding Libro.TipoLOD, Mode=TwoWay}" TextColor="DarkSlateGray" Grid.Column="4" Grid.ColumnSpan="5" Grid.Row="9"/>
+                                    <Label Text="Descripción:" FontAttributes="Bold" TextColor="Black" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="10"/>
+                                    <Label Text="{Binding Libro.DescripcionLObra, Mode=TwoWay}" TextColor="DarkSlateGray" Grid.Column="4" Grid.ColumnSpan="5" Grid.Row="10"/>
+                                </Grid>
+                            </Frame>
+                           
+                        </StackLayout>
+                    </xct:TabViewItem>
+                </xct:TabView>
+                <!-- your content here -->
+
+            </Grid>
+            <!-- the FAB -->
+            <ImageButton Source="{local:ImageResource LODapp.Content.Images.add.jpg}"
+            BackgroundColor="Transparent"
+            AbsoluteLayout.LayoutFlags="PositionProportional"  
+            AbsoluteLayout.LayoutBounds=".95,.90,80,80" Command="{Binding AddAnotacionCommand}"
+                         />
+        </AbsoluteLayout>
+        
+    </ContentPage.Content>
+</ContentPage>

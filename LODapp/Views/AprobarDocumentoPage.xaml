@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:local="clr-namespace:LODapp.Resources"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:viewmodels="clr-namespace:LODapp.ViewModels"
+             x:Class="LODapp.Views.AprobarDocumentoPage"
+             Title="Aprobar Documentos">
+    <ContentPage.BindingContext>
+        <viewmodels:AprobarDocumentoViewModel/>
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <Frame Padding="20">
+            <StackLayout>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Image Grid.Row="0" Grid.Column="0" HeightRequest="40" WidthRequest="40" Source="{local:ImageResource LODapp.Content.Images.addGeneric.png}" />
+                    <Label Text="Aprobar Documento" TextColor="Black" FontAttributes="Bold" FontSize="Medium" Grid.Column="2" Grid.ColumnSpan="3" Grid.Row="0"/>
+
+                    <Label Text="¿Desea aprobar el Documento?:" TextColor="Black" FontAttributes="Bold" FontSize="Small" Grid.Column="0" Grid.ColumnSpan="4" Grid.Row="6"/>
+                    <Label Text="{Binding NombreTipoDocumento}" TextColor="Black"  Grid.Column="0" Grid.ColumnSpan="4" Grid.Row="7"/>
+                </Grid>
+                <Button Text="Aprobar" BackgroundColor="Green" CornerRadius="10" TextColor="White" Command="{Binding AprobarDocCommand}"/>
+                
+            </StackLayout>
+        </Frame>
+    </ContentPage.Content>
+</ContentPage>

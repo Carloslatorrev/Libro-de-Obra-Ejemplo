@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:local="clr-namespace:LODapp.Resources"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:viewmodel="clr-namespace:LODapp.ViewModels"
+             x:Class="LODapp.Views.LoginPage"
+             Shell.FlyoutBehavior="Disabled"
+             Shell.NavBarIsVisible="False"
+             x:DataType="viewmodel:LoginViewModel"
+             BackgroundColor="White"
+             x:Name="LoginPageData">
+    <ContentPage.Content>
+        <StackLayout Padding="30" VerticalOptions="Center" HorizontalOptions="FillAndExpand">
+            <StackLayout Padding="30">
+                <Image Source="{local:ImageResource LODapp.Content.Images.LOD_APR.png}"
+                       HorizontalOptions="CenterAndExpand" VerticalOptions="Start" WidthRequest="150"/>
+                <Image Source="{local:ImageResource LODapp.Content.Images.aguas.png}"
+                       HorizontalOptions="CenterAndExpand" VerticalOptions="Start" />
+            </StackLayout>
+            <Label Text="RUT:" TextColor="DarkOrange" FontAttributes="Bold"/>
+            <Entry x:Name="txtRut" Placeholder="12345678-9" BackgroundColor="White" TextColor="DarkOrange" PlaceholderColor="LightSalmon" Text="{Binding Rut}"/>
+            <Label Text="Password:" TextColor="Orange" FontAttributes="Bold"/>
+            <Entry x:Name="txtPassword" PlaceholderColor="LightSalmon" BackgroundColor="White" IsPassword="True" TextColor="DarkOrange" Text="{Binding Password}" Placeholder="********" />
+            <Grid VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <CheckBox x:Name="checkRemember" IsChecked="{Binding RememberData, Mode=TwoWay}" Grid.Row="1" Grid.Column="1" VerticalOptions="Center"/>
+                <Label Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="3" Text="Recordar Cuenta" VerticalOptions="Center" TextColor="DarkOrange"/>
+            </Grid>
+            <Button Text="Ingresar" Command="{Binding CallLoginCommand}" BackgroundColor="LightSalmon"/>
+            <Label HorizontalOptions="Center">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="¿Has olvidado tu contraseña?"
+                          TextColor="DarkBlue"
+                          TextDecorations="Underline"
+                              FontSize="Small">
+                            <Span.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding RecoverPassword}"
+                                          CommandParameter="https://lodqa.aguasnuevas.cl/Account/ForgotPassword" />
+                            </Span.GestureRecognizers>
+                        </Span>
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

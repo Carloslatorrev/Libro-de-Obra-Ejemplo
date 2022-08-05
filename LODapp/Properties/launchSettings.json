@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "LODapp": {
+      "commandName": "Project",
+      "nativeDebugging": true
+    }
+  }
+}

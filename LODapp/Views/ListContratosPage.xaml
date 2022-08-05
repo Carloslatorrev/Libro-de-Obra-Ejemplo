@@ -1,0 +1,137 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:local="clr-namespace:LODapp.Resources"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:viewmodels="clr-namespace:LODapp.ViewModels" xmlns:model="clr-namespace:LODapp.Models"
+             x:Class="LODapp.Views.ListContratosPage"
+             x:Name="ContratosPage"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+             Title="Listado de Contratos"
+             BackgroundColor="White"
+             >
+    <ContentPage.BindingContext>
+        <viewmodels:ListContratoViewModel></viewmodels:ListContratoViewModel>
+    </ContentPage.BindingContext>
+    <RefreshView 
+        Command="{Binding ListCommand}"
+        IsRefreshing="{Binding IsBusy, Mode=OneWay}"
+        RefreshColor="Orange"
+        >
+        <StackLayout>
+            <SearchBar Placeholder="Buscar Contrato" x:Name="searchBarContrato"
+                       SearchCommand="{Binding SearchCommand}" TextColor="DarkSlateGray" PlaceholderColor="LightSlateGray" BackgroundColor="Transparent"
+                       SearchCommandParameter="{Binding Text, Source={x:Reference searchBarContrato}}"
+                      
+                       >
+            </SearchBar>
+            <Frame BackgroundColor="White" CornerRadius="10">
+                <CollectionView BackgroundColor="Transparent"
+                        ItemSizingStrategy="MeasureAllItems"
+                        ItemsLayout="VerticalList"
+                        ItemsSource="{Binding Contratos}"
+                        SelectedItem="{Binding selectedContrato, Mode=TwoWay}"
+                        RemainingItemsThreshold="1"
+                        RemainingItemsThresholdReachedCommand="{Binding DelayLoadMoreCommand}"
+                        SelectionMode="Single"
+                        >
+
+                    <CollectionView.EmptyView>
+                        <StackLayout Padding="5">
+                            <Label HorizontalOptions="Center" FontAttributes="Bold" TextColor="Black" FontSize="Medium" Text="Sin Contratos para Mostrar, Actualice la información."></Label>
+                        </StackLayout>
+                    </CollectionView.EmptyView>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <SwipeView>
+                                <SwipeView.BottomItems>
+
+                                </SwipeView.BottomItems>
+                                <StackLayout BackgroundColor="White" Padding="0,10,0,0">
+                                        <Frame BorderColor="LightSalmon" CornerRadius="10" Padding="0,5,0,0">
+                                            <StackLayout  
+                                                >
+                                                <StackLayout.GestureRecognizers>
+                                                    <TapGestureRecognizer Command="{Binding Source={x:Reference ContratosPage},Path=BindingContext.DetailsCommand}"
+                                                                      CommandParameter="{Binding IdContrato}"/>
+                                                </StackLayout.GestureRecognizers>
+                                                <StackLayout Margin="15">
+                                                    <Label VerticalOptions="Center"
+                                                        FontSize="Large">
+                                                        <Label.FormattedText>
+                                                            <FormattedString>
+                                                                <Span Text="{Binding CodigoContrato}" FontAttributes="Bold" FontSize="Medium" TextColor="Black"/>
+                                                                <Span Text=" - " TextColor="Black" FontAttributes="Bold" FontSize="Medium" />
+                                                                <Span Text="{Binding NombreContrato}" FontAttributes="Bold" FontSize="Medium" TextColor="Black"/>
+                                                            </FormattedString>
+
+                                                        </Label.FormattedText>
+                                                    </Label>
+                                                </StackLayout>
+
+
+
+                                                <Frame BorderColor="LightSalmon" CornerRadius="10" Padding="10,5,5,5">
+                                                    <Grid>
+                                                        <Grid.RowDefinitions>
+                                                            <RowDefinition Height="Auto" />
+                                                            <RowDefinition Height="Auto" />
+                                                        </Grid.RowDefinitions>
+
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="60"></ColumnDefinition>
+                                                            <ColumnDefinition Width="*"></ColumnDefinition>
+                                                        </Grid.ColumnDefinitions>
+                                                        <Image Grid.Column="0" Source="{Binding rutaCompleta}" IsVisible="{Binding UsarRuta}"
+                                                                        WidthRequest="30">
+                                                        </Image>
+
+                                                        <Image Grid.Column="0" Source="{local:ImageResource LODapp.Content.Images.contratoGeneric.png}" IsVisible="{Binding UsarLocal}"
+                                                                        WidthRequest="30">
+                                                        </Image>
+                                                        <StackLayout Grid.Column="1">
+                                                            <Label VerticalOptions="Center"
+                                                                            FontSize="Large">
+                                                                <Label.FormattedText>
+                                                                    <FormattedString>
+                                                                        <Span Text="Dirección MOP:" FontAttributes="Bold" FontSize="Medium" TextColor="Black" />
+                                                                        <Span Text="{Binding DireccionMOP}" FontSize="Medium" TextColor="Black"/>
+                                                                    </FormattedString>
+                                                                </Label.FormattedText>
+                                                            </Label>
+                                                            <Label VerticalOptions="Center"
+                                                             FontSize="Large">
+                                                                <Label.FormattedText>
+                                                                    <FormattedString>
+                                                                        <Span Text="Emp. Contratista:" FontAttributes="Bold"  FontSize="Medium" TextColor="Black"/>
+                                                                        <Span Text="{Binding Empresa_Contratista}" FontSize="Medium" TextColor="Black"/>
+                                                                    </FormattedString>
+                                                                </Label.FormattedText>
+                                                            </Label>
+                                                        </StackLayout>
+                                                    </Grid>
+
+                                                </Frame>
+
+                                            </StackLayout>
+                                        </Frame>
+                                    </StackLayout>
+                            </SwipeView>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                    <CollectionView.Header>
+                        <StackLayout Orientation="Horizontal">
+                            <Label HorizontalOptions="Center"></Label>
+                        </StackLayout>
+                    </CollectionView.Header>
+                    <CollectionView.Footer>
+                        <StackLayout>
+                        </StackLayout>
+                    </CollectionView.Footer>
+                </CollectionView>
+            </Frame>
+            
+        </StackLayout>
+
+        
+    </RefreshView>
+    
+</ContentPage>

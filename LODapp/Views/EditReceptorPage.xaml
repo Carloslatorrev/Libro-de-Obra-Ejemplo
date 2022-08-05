@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:viewmodels="clr-namespace:LODapp.ViewModels"
+             x:Class="LODapp.Views.EditReceptorPage"
+             x:DataType="viewmodels:EditarReceptorViewModel"
+             xmlns:local="clr-namespace:LODapp.Resources"
+             Title="Editar Receptor"
+             >
+    <Frame Padding="20">
+        <StackLayout>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Image Grid.Row="0" Grid.Column="0" HeightRequest="40" WidthRequest="40" Source="{local:ImageResource LODapp.Content.Images.userGeneric.png}" />
+                <Label Text="Editar Receptor" TextColor="Black"  FontAttributes="Bold" FontSize="Medium" Grid.Column="2" Grid.ColumnSpan="3" Grid.Row="0"/>
+
+                <Label Text="Receptor:" TextColor="Black" FontAttributes="Bold" FontSize="Small" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="12"/>
+                <Label Text="{Binding NombreUser}" FontSize="Small" Grid.Column="3" Grid.ColumnSpan="4" Grid.Row="12"/>
+                <Label Text="Es Principal:" TextColor="Black" FontAttributes="Bold" FontSize="Small" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="10"/>
+                <CheckBox IsChecked="{Binding Principal, Mode=TwoWay}" Grid.Column="3" Grid.ColumnSpan="4" Grid.Row="10"/>
+                <Label Text="Solicita Respuesta:" TextColor="Black" FontAttributes="Bold" FontSize="Small" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="10"/>
+                <CheckBox IsChecked="{Binding SolicitaRespuesta, Mode=TwoWay}" Grid.Column="3" Grid.ColumnSpan="4" Grid.Row="10"/>
+
+            </Grid>
+            <Button Text="Guardar" BackgroundColor="Green" TextColor="White" CornerRadius="10" Command="{Binding EditReceptorCommand}"/>
+        </StackLayout>
+    </Frame>
+</ContentPage>

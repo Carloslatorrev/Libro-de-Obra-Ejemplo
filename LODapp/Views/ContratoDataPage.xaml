@@ -1,0 +1,292 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:models="clr-namespace:LODapp.Models" xmlns:viewmodels="clr-namespace:LODapp.ViewModels"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+             x:Class="LODapp.Views.ContratoDataPage"
+             x:Name="ContratoDetailsPage"
+             xmlns:fontAwesome="clr-namespace:FontAwesome"
+             xmlns:local="clr-namespace:LODapp.Resources"
+             x:DataType="viewmodels:ContratoDataViewModel"
+             Title="Detalle Contrato"
+             BackgroundColor="White">
+    <ContentPage.BindingContext>
+        <viewmodels:ContratoDataViewModel/>
+    </ContentPage.BindingContext>
+    <Shell.BackButtonBehavior>
+        <BackButtonBehavior Command="{Binding BackCommand}"/>
+    </Shell.BackButtonBehavior>
+    <ContentPage.Content>
+        <xct:TabView TabStripPlacement="Bottom"
+                     TabStripBackgroundColor="White"
+                     TabStripHeight="60"
+                     TabIndicatorColor="DarkOrange"
+                     TabContentBackgroundColor="Transparent">
+            <xct:TabViewItem Text="{x:Static fontAwesome:FontAwesomeIcons.Book}" FontFamily="FAS" FontSize="20" FontSizeSelected="25" TextColor="DarkGray" TextColorSelected="DarkOrange">
+                <StackLayout Padding="20">
+                    
+                    <Frame Padding="20" BorderColor="#EB984E" CornerRadius="10">
+                        <StackLayout>
+                            <Label IsVisible="false" Text="{Binding IdContrato}"/>
+                            <Label VerticalOptions="Center"
+                                       FontSize="Medium" FontAttributes="Bold">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="{Binding Source={x:Reference ContratoDetailsPage}, Path=BindingContext.Contrato.CodigoContrato}" TextColor="Black"/>
+                                        <Span Text=" - " TextColor="Black" />
+                                        <Span Text="{Binding Contrato.NombreContrato, Mode=TwoWay}" TextColor="Black"/>
+                                    </FormattedString>
+
+                                </Label.FormattedText>
+                            </Label>
+                            <Label VerticalOptions="Center"
+                                       FontSize="Small">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="{Binding Contrato.DescripcionContrato, Mode=TwoWay}" TextColor="Black"/>
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+
+                            <StackLayout>
+                                <Label VerticalOptions="Center"
+                                       FontSize="Medium">
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="Porcentaje Avance de Proyectos" TextColor="Black"/>
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+                                <ProgressBar
+                                    Progress="45"
+                                    
+                                    ProgressColor="Green"/>
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"></ColumnDefinition>
+                                        <ColumnDefinition Width="*"></ColumnDefinition>
+                                        <ColumnDefinition Width="*"></ColumnDefinition>
+                                        <ColumnDefinition Width="*"></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+                                    <Label Grid.Row="1" Grid.Column="0" TextColor="Black" Text="Fecha finalización" FontSize="Small"/>
+                                    <Label Grid.Row="2" Grid.Column="0" TextColor="DarkSlateGray" Text="{Binding FechaFinalizacion}" FontSize="Small"/>
+                                    <Label Grid.Row="1" Grid.Column="3" TextColor="Black" Text="Plazo" FontSize="Small"/>
+                                    <Label Grid.Row="2" Grid.Column="3" TextColor="DarkSlateGray" Text="{Binding Contrato.PlazoInicialContrato}" FontSize="Small"/>
+                                </Grid>
+                                <Label Text="Anotaciones Pendiente de Atención" FontSize="Medium" IsVisible="False"></Label>
+
+                            </StackLayout>
+                        </StackLayout>
+                    </Frame>
+                    <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" BackgroundColor="White" Color="DarkOrange"/>
+                    <Frame BorderColor="LightSalmon" CornerRadius="10">
+                        <StackLayout Padding="10">
+                            <ListView
+                                            SelectedItem="{Binding selectedLibro, Mode=TwoWay}"
+                                            CachingStrategy="RecycleElement"
+                                            BackgroundColor="Transparent"
+                                            ItemsSource="{Binding LibroObras}"
+                                            HasUnevenRows="True"
+                                            IsPullToRefreshEnabled="True"
+                                            SelectionMode="None"
+                                            SeparatorVisibility="None"
+                                            VerticalScrollBarVisibility="Always"
+                                            VerticalOptions="Start"
+                                >
+                                <ListView.ItemTemplate>
+                                    <DataTemplate x:DataType="models:LOD_LibroObras">
+                                        <ViewCell>
+                                            <Frame BackgroundColor="White" Opacity="0.9" CornerRadius="10" Margin="10,10" BorderColor="{Binding Color}">
+                                                <Grid Padding="10">
+                                                    <Grid.RowDefinitions>
+                                                        <RowDefinition Height="Auto" />
+                                                        <RowDefinition Height="Auto" />
+                                                    </Grid.RowDefinitions>
+
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="60"></ColumnDefinition>
+                                                        <ColumnDefinition Width="*"></ColumnDefinition>
+                                                    </Grid.ColumnDefinitions>
+                                                    <Image Grid.Column="0" Source="{local:ImageResource LODapp.Content.Images.libroGeneric.jpg}"
+                                                                        WidthRequest="40"/>
+
+                                                    <StackLayout Grid.Column="1" >
+                                                        <StackLayout.GestureRecognizers>
+                                                            <TapGestureRecognizer Command="{Binding Source={x:Reference ContratoDetailsPage},Path=BindingContext.DetailsCommand}"
+                                                                      CommandParameter="{Binding IdLod}"/>
+                                                        </StackLayout.GestureRecognizers>
+                                                        <Label VerticalOptions="Center"
+                                                                        FontSize="Medium">
+                                                            <Label.FormattedText>
+                                                                <FormattedString>
+
+                                                                    <Span Text="{Binding NombreLibroObra}" TextColor="Black"/>
+                                                                </FormattedString>
+                                                            </Label.FormattedText>
+                                                        </Label>
+                                                    </StackLayout>
+                                                </Grid>
+                                            </Frame>
+                                            
+                                        </ViewCell>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
+                        </StackLayout>
+                    </Frame>
+                </StackLayout>
+            </xct:TabViewItem>
+            <xct:TabViewItem Text="{x:Static fontAwesome:FontAwesomeIcons.Info}" FontFamily="FAS" FontSize="20" FontSizeSelected="25" TextColor="DarkGray" TextColorSelected="DarkOrange">
+                <StackLayout Padding="20">
+
+                    <Frame BorderColor="LightSalmon" Padding="10" CornerRadius="10">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Label Text="Información Contrato:" TextColor="Black" FontFamily="FAS" FontAttributes="Bold" FontSize="Medium" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3"/>
+                            <Label Text="Estado:" TextColor="Black" FontAttributes="Bold" Grid.Column="0" Grid.Row="2"/>
+                            <Label Text="{x:Static fontAwesome:FontAwesomeIcons.Circle}" TextColor="Green" FontFamily="FAS" IsVisible="{Binding Activo}" Grid.Column="1" Grid.Row="2"/>
+                            <Label Text="Monto Inicial:" TextColor="Black" FontAttributes="Bold" Grid.Column="2" Grid.Row="2"/>
+                            <Label Text="{Binding Contrato.MontoInicialContrato, Mode=TwoWay}" TextColor="DarkSlateGray" Grid.Column="3" Grid.Row="2"/>
+                            <Label Text="Creado Por:" TextColor="Black" FontAttributes="Bold" Grid.Column="0" Grid.Row="3"/>
+                            <Label Text="{Binding Contrato.UsuarioCreador, Mode=TwoWay}" Grid.Column="1" TextColor="DarkSlateGray" Grid.Row="3"/>
+                            <Label Text="Fecha Creación:" TextColor="Black" FontAttributes="Bold" Grid.Column="2" Grid.Row="3" />
+                            <Label Text="{Binding Contrato.FechaCreacionContrato, Mode=TwoWay}" Grid.Column="3" Grid.Row="3" TextColor="DarkSlateGray"/>
+                            <Label Text="Inicia el:" TextColor="Black" FontAttributes="Bold" Grid.Column="0" Grid.Row="4"/>
+                            <Label Text="{Binding Contrato.FechaInicioContrato, Mode=TwoWay}" Grid.Column="1" Grid.Row="4" TextColor="DarkSlateGray"/>
+                            <Label Text="Plazo (días):" TextColor="Black" FontAttributes="Bold" Grid.Column="2" Grid.Row="4" />
+                            <Label Text="{Binding Contrato.PlazoInicialContrato, Mode=TwoWay}" Grid.Column="3" Grid.Row="4" TextColor="DarkSlateGray"/>
+                            <Label Text="Descripción:" TextColor="Black" FontAttributes="Bold" Grid.Column="0" Grid.Row="5"/>
+                            <Label Text="{Binding Contrato.DescripcionContrato, Mode=TwoWay}" Grid.Column="1" Grid.Row="5" TextColor="DarkSlateGray"/>
+                            <Label Text="Emp. Contratista" TextColor="Black" FontAttributes="Bold" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="7"/>
+                            <Label Text="{Binding Contrato.Empresa_Contratista, Mode=TwoWay}" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="8" TextColor="DarkSlateGray"/>
+                            <Label Text="Dirección MOP" TextColor="Black" FontAttributes="Bold" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="9"/>
+                            <Label Text="{Binding Contrato.DireccionMOP, Mode=TwoWay}" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="10" TextColor="DarkSlateGray"/>
+                            <Label Text="Emp. Fiscalizadora" TextColor="Black" FontAttributes="Bold" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="11"/>
+                            <Label Text="{Binding Contrato.Empresa_Fiscalizadora, Mode=TwoWay}" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="12" TextColor="DarkSlateGray"/>
+                        </Grid>
+                    </Frame>
+                   
+                </StackLayout>
+            </xct:TabViewItem>
+            <xct:TabViewItem Text="{x:Static fontAwesome:FontAwesomeIcons.User}" FontFamily="FAS" FontSize="20" FontSizeSelected="25" TextColor="DarkGray" TextColorSelected="DarkOrange"
+                             TapCommand="{Binding GetUserCommand}">
+                <StackLayout Padding="10">
+
+                    <Label Text="Usuarios Activos:" TextColor="Black" FontFamily="FAS" FontAttributes="Bold" FontSize="Medium"/>
+                    <CollectionView BackgroundColor="Transparent"
+                        ItemSizingStrategy="MeasureAllItems"
+                        ItemsLayout="VerticalList"
+                        ItemsSource="{Binding Source={x:Reference ContratoDetailsPage},Path=BindingContext.UsuariosContrato}"
+                        SelectedItem="{Binding Source={x:Reference ContratoDetailsPage},Path=BindingContext.selectedUser, Mode=TwoWay}"
+                        RemainingItemsThreshold="1"
+                        RemainingItemsThresholdReachedCommand="{Binding Source={x:Reference ContratoDetailsPage},Path=BindingContext.DelayLoadMoreUserCommand}"
+                        SelectionMode="Single"
+                        x:DataType="models:LOD_UsuariosLod">
+                        
+                        <CollectionView.EmptyView>
+                            <StackLayout Padding="12">
+                                <Label HorizontalOptions="Center" FontSize="Medium" Text="Sin Usuarios para Mostrar"></Label>
+                            </StackLayout>
+                        </CollectionView.EmptyView>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <SwipeView>
+                                    <SwipeView.RightItems>
+                                        <SwipeItem Text="Llamar" Command="{Binding Source={x:Reference ContratoDetailsPage},Path=BindingContext.CallUserCommand}" CommandParameter="{Binding telefono}" IconImageSource="{local:ImageResource LODapp.Content.Images.llamadaGeneric.png}" BackgroundColor="LimeGreen">
+                                            
+                                        </SwipeItem>
+                                        <SwipeItem Text="Enviar Email" IconImageSource="{local:ImageResource LODapp.Content.Images.emailGeneric.png}" BackgroundColor="LightGray">
+
+                                        </SwipeItem>
+                                    </SwipeView.RightItems>
+                                    <Grid Padding="10">
+                                        <StackLayout>
+                                            <Frame BorderColor="LightSalmon" CornerRadius="10">
+                                                <StackLayout>
+                                                    <Grid>
+                                                        <Grid.RowDefinitions>
+                                                            <RowDefinition Height="Auto" />
+                                                            <RowDefinition Height="Auto" />
+                                                        </Grid.RowDefinitions>
+
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="60"></ColumnDefinition>
+                                                            <ColumnDefinition Width="*"></ColumnDefinition>
+                                                        </Grid.ColumnDefinitions>
+                                                        <Image Grid.Column="0" Source="{Binding RutaImagen}" IsVisible="{Binding UsarRuta}"
+                                                                        WidthRequest="30">
+                                                        </Image>
+                                                        <Image Grid.Column="0" Source="{local:ImageResource LODapp.Content.Images.userGeneric.png}" IsVisible="{Binding UsarLocal}"
+                                                                        WidthRequest="30">
+                                                        </Image>
+                                                        <StackLayout Grid.Column="1">
+                                                            <Label VerticalOptions="Center"
+                                                                            FontSize="Large">
+                                                                <Label.FormattedText>
+                                                                    <FormattedString>
+                                                                        <Span Text="{Binding Usuario}" FontSize="Medium" TextColor="Black"/>
+                                                                    </FormattedString>
+                                                                </Label.FormattedText>
+                                                            </Label>
+                                                            <Label VerticalOptions="Center"
+                                                                    FontSize="Large">
+                                                                <Label.FormattedText>
+                                                                    <FormattedString>
+                                                                        <Span Text="rol:" FontSize="Medium" TextColor="Black"/>
+                                                                        <Span Text="{Binding rol}" FontSize="Medium" TextColor="Black"/>
+                                                                    </FormattedString>
+                                                                </Label.FormattedText>
+                                                            </Label>
+                                                        </StackLayout>
+                                                    </Grid>
+                                                </StackLayout>
+                                            </Frame>
+
+                                        </StackLayout>
+                                    </Grid>
+                                </SwipeView>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                        <CollectionView.Header>
+                            <StackLayout Orientation="Horizontal">
+                                <Label HorizontalOptions="Center"></Label>
+                            </StackLayout>
+                        </CollectionView.Header>
+                        <CollectionView.Footer>
+                            <StackLayout>
+                            </StackLayout>
+                        </CollectionView.Footer>
+                    </CollectionView>
+                   
+                </StackLayout>
+            </xct:TabViewItem>
+        </xct:TabView>
+
+    </ContentPage.Content>
+</ContentPage>

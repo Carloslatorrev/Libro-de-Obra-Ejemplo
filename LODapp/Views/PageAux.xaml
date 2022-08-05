@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="LODapp.Views.PageAux">
+    <ContentPage.Content>
+        <StackLayout>
+            <Button Text="Filtro Avanzado" BackgroundColor="Transparent" BorderColor="Transparent" TextColor="DarkOrange" Padding="2" FontSize="Small" HorizontalOptions="Start">
+            </Button>
+            <StackLayout IsVisible="{Binding ShowListLod}">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Row="0" Grid.Column="0" Text="Bandeja Principal" TextColor="{Binding Libro.Color}" FontSize="Small"/>
+                    <Picker Grid.Row="1" Grid.Column="0" ItemsSource="{Binding Remitentes}" TextColor="{Binding Libro.Color}" FontSize="Small"/>
+                    <Label Grid.Row="1" Grid.Column="1" Text="Destinatario" TextColor="{Binding Libro.Color}" FontSize="Small"/>
+                    <Picker Grid.Row="1" Grid.Column="1" ItemsSource="{Binding Destinatarios}" TextColor="{Binding Libro.Color}" FontSize="Small"/>
+                    <Label Grid.Row="2" Grid.Column="0" Text="Contenido en Cuerpo" TextColor="{Binding Libro.Color}" FontSize="Small"/>
+                    <Entry Grid.Row="3" Grid.Column="1" Text="..." FontSize="Small"/>
+                    <Label Grid.Row="2" Grid.Column="0" Text="Fecha de Publicación" TextColor="{Binding Libro.Color}" FontSize="Small"/>
+                    <DatePicker Grid.Row="3" Grid.Column="1" FontSize="Small"/>
+                    <Button Grid.Row="4" Grid.Column="0" Text="Filtrar" BorderColor="{Binding Libro.Color}" FontSize="Small"/>
+                </Grid>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:viewmodels="clr-namespace:LODapp.ViewModels"
+             x:Class="LODapp.Views.FirmarAnotacionPage"
+             xmlns:local="clr-namespace:LODapp.Resources"
+              x:DataType="viewmodels:FirmarAnotacionViewModel"
+             Title="Firmar Anotación">
+    <Shell.BackButtonBehavior>
+        <BackButtonBehavior Command="{Binding BackCommand}"/>
+    </Shell.BackButtonBehavior>
+    <ContentPage.BindingContext>
+        <viewmodels:FirmarAnotacionViewModel/>
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <Frame Padding="20">
+            <StackLayout>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Image Grid.Row="0" Grid.Column="0" HeightRequest="40" WidthRequest="40" Source="{local:ImageResource LODapp.Content.Images.firmaGeneric.png}" />
+                    <Label Text="Firmar Anotación" TextColor="Black" FontAttributes="Bold" FontSize="Medium" Grid.Column="2" Grid.ColumnSpan="3" Grid.Row="0"/>
+                    <Label Text="La Firma se realizará con Firma Simple" TextColor="Black"  FontAttributes="Bold" FontSize="Small" Grid.Column="0" Grid.ColumnSpan="4" Grid.Row="4"/>
+                    <Label Text="Ingrese su Password:" FontAttributes="Bold" TextColor="Black"  FontSize="Small" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="5"/>
+                    <Entry Text="{Binding Password}" Placeholder="*******" TextColor="Black"  IsPassword="True" PlaceholderColor="LightSlateGray" FontSize="Small" Grid.Column="0" Grid.ColumnSpan="4" Grid.Row="6"/>
+                    
+
+                </Grid>
+                <Button Text="Firmar" BackgroundColor="Green" TextColor="White" CornerRadius="10" Command="{Binding FirmarCommand}"/>
+            </StackLayout>
+        </Frame>
+    </ContentPage.Content>
+</ContentPage>

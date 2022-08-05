@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:viewmodel="clr-namespace:LODapp.ViewModels"
+             x:Class="LODapp.Views.LogoutData"
+              Shell.FlyoutBehavior="Disabled"
+             Shell.NavBarIsVisible="False"
+              x:DataType="viewmodel:LogoutDataViewModel"
+             BackgroundColor="White"
+             >
+    <ContentPage.BindingContext>
+        <viewmodel:LogoutDataViewModel/>
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <StackLayout>
+            <Frame>
+                <StackLayout>
+                    <Label Text="Desconectando..."
+                VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="CenterAndExpand" TextColor="Black" />
+                    <ActivityIndicator VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" BackgroundColor="White" Color="DarkOrange"/>
+                </StackLayout>
+            </Frame>
+        </StackLayout>
+
+    </ContentPage.Content>
+</ContentPage>

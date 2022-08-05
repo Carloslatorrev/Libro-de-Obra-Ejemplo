@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:viewmodels="clr-namespace:LODapp.ViewModels"
+             xmlns:local="clr-namespace:LODapp.Resources" xmlns:viewmodels1="clr-namespace:LODapp.Models"
+             x:Class="LODapp.Views.AddOtroDocumentoPage"
+             xmlns:fontAwesome="clr-namespace:FontAwesome"
+             Title="Añadir Otro Documento">
+    <Shell.BackButtonBehavior>
+        <BackButtonBehavior Command="{Binding BackCommand}"/>
+    </Shell.BackButtonBehavior>
+    <ContentPage.BindingContext>
+        <viewmodels:AddOtroDocumentoViewModel/>
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <Frame Padding="20">
+            <StackLayout>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Image Grid.Row="0" Grid.Column="0" HeightRequest="40" WidthRequest="40" Source="{local:ImageResource LODapp.Content.Images.fileuploadGeneric.png}" />
+                    <Label Text="Añadir Otro Documento" TextColor="Black" FontAttributes="Bold" FontSize="Medium" Grid.Column="2" Grid.ColumnSpan="3" Grid.Row="0"/>
+                    <Label Text="Clasificación:" TextColor="Black" FontAttributes="Bold" FontSize="Small" Grid.Column="0" Grid.ColumnSpan="4" Grid.Row="2"/>
+                    <Picker ItemsSource="{Binding ListClassOne, Mode=TwoWay}" ItemDisplayBinding="{Binding Nombre}" SelectedItem="{Binding selectedClassOne}" Title="Seleccione una Clasificación" FontSize="Small" Grid.Column="0" Grid.ColumnSpan="4" Grid.Row="3"/>
+                    <Label Text="Subclasificación:" TextColor="Black" FontAttributes="Bold" FontSize="Small" Grid.Column="0" Grid.ColumnSpan="4" Grid.Row="4"/>
+                    <Picker ItemsSource="{Binding ListClassTwo, Mode=TwoWay}" ItemDisplayBinding="{Binding Nombre}" SelectedItem="{Binding selectedClassTwo}" Title="Seleccione una Subclasificación" FontSize="Small" Grid.Column="0" Grid.ColumnSpan="4" Grid.Row="5"/>
+                    <Label Text="TipoDocumento:" TextColor="Black" FontAttributes="Bold" FontSize="Small" Grid.Column="0" Grid.ColumnSpan="4" Grid.Row="6"/>
+                    <Picker ItemsSource="{Binding ListTipoDocumento, Mode=TwoWay}" ItemDisplayBinding="{Binding Tipo}" SelectedItem="{Binding selectedTipoDocumento}" Title="Seleccione un Tipo de Documento" FontSize="Small" Grid.Column="0" Grid.ColumnSpan="4" Grid.Row="7"/>
+                    <Label Text="Nombre Documento:" TextColor="Black" FontAttributes="Bold" FontSize="Small" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="8"/>
+                    <Entry Text="{Binding TituloDocumento}" Placeholder="Título" PlaceholderColor="LightGray" FontSize="Small" Grid.Column="0" Grid.ColumnSpan="4" Grid.Row="9"/>
+                    <Label Text="Observación:" TextColor="Black" FontAttributes="Bold" FontSize="Small" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="10"/>
+                    <Editor Text="{Binding ObservacionDoc}" Placeholder="Cuerpo" PlaceholderColor="LightGray" FontSize="Small" Grid.Column="0" Grid.ColumnSpan="4" Grid.Row="11"/>
+                    <Label Text="Seleccione Archivo:" TextColor="Black" FontAttributes="Bold" FontSize="Micro" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="12"/>
+                    <Button Text="{x:Static fontAwesome:FontAwesomeIcons.Upload}" FontFamily="FAS" CornerRadius="10" Command="{Binding UploadArchiveCommand}" BackgroundColor="LightGray" TextColor="Black" FontSize="Large" Grid.Column="1" Grid.ColumnSpan="4" Grid.Row="13"/>
+                    <Button Text="{x:Static fontAwesome:FontAwesomeIcons.CameraRetro}" FontFamily="FAS" CornerRadius="10" Command="{Binding TakePhotoCommand}" BackgroundColor="LightGray" TextColor="Black" FontSize="Large" Grid.Column="0" Grid.ColumnSpan="1" Grid.Row="13"/>
+                    <Label Text="{Binding FileName}" FontAttributes="Bold" FontSize="Micro" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="14"/>
+                </Grid>
+                <Button Text="Crear" BackgroundColor="Green" TextColor="White" CornerRadius="10" Command="{Binding CreateDocumentoCommand}"/>
+            </StackLayout>
+        </Frame>
+    </ContentPage.Content>
+</ContentPage>

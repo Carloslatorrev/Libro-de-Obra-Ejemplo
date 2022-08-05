@@ -1,0 +1,193 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <ProduceReferenceAssembly>true</ProduceReferenceAssembly>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="NewFolder\**" />
+    <EmbeddedResource Remove="NewFolder\**" />
+    <None Remove="NewFolder\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Data\EmpresasDBServices.cs" />
+    <Compile Remove="Models\LOD_Carpetas.cs" />
+    <Compile Remove="Models\MAE_ciudad.cs" />
+    <Compile Remove="Models\MAE_DireccionesMOP.cs" />
+    <Compile Remove="Models\MAE_Empresa.cs" />
+    <Compile Remove="Models\MAE_moneda.cs" />
+    <Compile Remove="Models\MAE_region.cs" />
+    <Compile Remove="Models\MAE_Sucursales.cs" />
+    <Compile Remove="Views\listAntiguaPage.xaml.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Remove="Views\listAntiguaPage.xaml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Content\Images\add.jpg" />
+    <None Remove="Content\Images\addGeneric.png" />
+    <None Remove="Content\Images\aguas.png" />
+    <None Remove="Content\Images\closeGeneric.png" />
+    <None Remove="Content\Images\contratoGeneric.png" />
+    <None Remove="Content\Images\editGeneric.png" />
+    <None Remove="Content\Images\emailGeneric.png" />
+    <None Remove="Content\Images\favorite_check.jpg" />
+    <None Remove="Content\Images\favorite_uncheck.png" />
+    <None Remove="Content\Images\fileuploadGeneric.png" />
+    <None Remove="Content\Images\firmaGeneric.png" />
+    <None Remove="Content\Images\greenCircle_Generic.png" />
+    <None Remove="Content\Images\libroGeneric.jpg" />
+    <None Remove="Content\Images\llamadaGeneric.png" />
+    <None Remove="Content\Images\LOD_APR.png" />
+    <None Remove="Content\Images\logoutGeneric.png" />
+    <None Remove="Content\Images\Logo_APR.png" />
+    <None Remove="Content\Images\questionGeneric.png" />
+    <None Remove="Content\Images\redCircle_Generic.png" />
+    <None Remove="Content\Images\userGeneric.png" />
+    <None Remove="Content\Images\yellowCircle_Generic.png" />
+    <None Remove="Resources\Fonts\fa-brands-400.ttf" />
+    <None Remove="Resources\Fonts\fa-regular-400.ttf" />
+    <None Remove="Resources\Fonts\fa-solid-900.ttf" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Images\add.jpg" />
+    <EmbeddedResource Include="Content\Images\addGeneric.png" />
+    <EmbeddedResource Include="Content\Images\aguas.png" />
+    <EmbeddedResource Include="Content\Images\closeGeneric.png" />
+    <EmbeddedResource Include="Content\Images\contratoGeneric.png" />
+    <EmbeddedResource Include="Content\Images\editGeneric.png" />
+    <EmbeddedResource Include="Content\Images\emailGeneric.png" />
+    <EmbeddedResource Include="Content\Images\favorite_check.jpg" />
+    <EmbeddedResource Include="Content\Images\favorite_uncheck.png" />
+    <EmbeddedResource Include="Content\Images\fileuploadGeneric.png" />
+    <EmbeddedResource Include="Content\Images\firmaGeneric.png" />
+    <EmbeddedResource Include="Content\Images\greenCircle_Generic.png" />
+    <EmbeddedResource Include="Content\Images\libroGeneric.jpg" />
+    <EmbeddedResource Include="Content\Images\llamadaGeneric.png" />
+    <EmbeddedResource Include="Content\Images\LOD_APR.png" />
+    <EmbeddedResource Include="Content\Images\logoutGeneric.png" />
+    <EmbeddedResource Include="Content\Images\Logo_APR.png" />
+    <EmbeddedResource Include="Content\Images\questionGeneric.png" />
+    <EmbeddedResource Include="Content\Images\redCircle_Generic.png" />
+    <EmbeddedResource Include="Content\Images\userGeneric.png" />
+    <EmbeddedResource Include="Content\Images\yellowCircle_Generic.png" />
+    <EmbeddedResource Include="Resources\Fonts\fa-brands-400.ttf" />
+    <EmbeddedResource Include="Resources\Fonts\fa-regular-400.ttf" />
+    <EmbeddedResource Include="Resources\Fonts\fa-solid-900.ttf" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="PCLStorage" Version="1.0.2" />
+    <PackageReference Include="Refractored.FloatingActionButtonForms" Version="2.1.0" />
+    <PackageReference Include="Refractored.MvvmHelpers" Version="1.6.2" />
+    <PackageReference Include="Sharpnado.Shadows" Version="1.2.0" />
+    <PackageReference Include="Sharpnado.Tabs" Version="2.2.0" />
+    <PackageReference Include="sqlite-net-pcl" Version="1.8.116" />
+    <PackageReference Include="SQLiteNetExtensions.Async" Version="2.1.0" />
+    <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
+    <PackageReference Include="Xamarin.CommunityToolkit" Version="2.0.1" />
+    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2291" />  
+    <PackageReference Include="Xamarin.Essentials" Version="1.7.1" />  
+    <PackageReference Include="xunit.extensibility.core" Version="2.4.1" />  
+    <PackageReference Include="xunit.extensibility.execution" Version="2.4.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Mono.Android">
+      <HintPath>..\..\..\..\..\..\..\..\..\Program Files\Microsoft Visual Studio\2019\Community\Common7\IDE\ReferenceAssemblies\Microsoft\Framework\MonoAndroid\v11.0\Mono.Android.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Views\AddAnotacionPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\AddDocumentoPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\AddOtroDocumentoPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\AddReceptorPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\AddReferenciaPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\AnotacionDataPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\AprobarDocumentoPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\AsistenciaTelefonica.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\EditarAnotacionPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\EditReceptorPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\EliminarAnotacionPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\EliminarDocPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\EliminarReceptorPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\EliminarReferenciaPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\EnviarCorreoSoporte.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\FirmarAnotacionPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\LibroDataPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\LoadAnotacionDataPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\LoadContratoDataPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\LoadDataPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\LoadLibroDataPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\LoadReferenciaDataPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\LogoutData.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\PageAux.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\PreguntasFrecuentes.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\RechazarDocumentoPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\SolicitarFirmaAnotacionPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\VBConfirmedPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+</Project>

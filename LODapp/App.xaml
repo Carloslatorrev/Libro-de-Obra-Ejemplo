@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Application xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="LODapp.App">
+    <!--
+        Define global resources and styles here, that apply to all pages in your app.
+    -->
+    <Application.Resources>
+        <ResourceDictionary>
+            <!-- <Color x:Key="Primary">#2196F3</Color>-->
+            <Color x:Key="Primary">#DC7633</Color>
+            <Style TargetType="Button">
+                <Setter Property="TextColor" Value="White"></Setter>
+                <Setter Property="VisualStateManager.VisualStateGroups">
+                    <VisualStateGroupList>
+                        <VisualStateGroup x:Name="CommonStates">
+                            <VisualState x:Name="Normal">
+                                <VisualState.Setters>
+                                    <Setter Property="BackgroundColor" Value="{StaticResource Primary}" />
+                                </VisualState.Setters>
+                            </VisualState>
+                            <VisualState x:Name="Disabled">
+                                <VisualState.Setters>
+                                    <Setter Property="BackgroundColor" Value="#332196F3" />
+                                </VisualState.Setters>
+                            </VisualState>
+                        </VisualStateGroup>
+                    </VisualStateGroupList>
+                </Setter>
+            </Style>
+            <x:String x:Key="BookIcon">&#xf02d;</x:String>
+            <x:String x:Key="ContratoIcon">&#xf56c;</x:String>
+            <x:String x:Key="AnotacionIcon">&#xf31c;</x:String>
+            <x:String x:Key="UserIcon">&#xf007;</x:String>
+            <x:String x:Key="CallIcon">&#xf098;</x:String>
+            <x:String x:Key="SquarePlusIcon">&#xf0fe;</x:String>
+            <x:String x:Key="PlusIcon">&#x2b;</x:String>
+            <x:String x:Key="PersonPlusIcon">&#xe541;</x:String>
+            <x:String x:Key="UserPlusIcon">&#xf234;</x:String>
+            <x:String x:Key="BookmarkIcon">&#xf02e;</x:String>
+            <x:String x:Key="CircleInfoIcon">&#xf05a;</x:String>
+            <x:String x:Key="LogIcon">&#xf543;</x:String>
+            <x:String x:Key="UploadIcon">&#xf0ee;</x:String>
+            <x:String x:Key="DeleteIcon">&#xf2ed;</x:String>
+        </ResourceDictionary>        
+    </Application.Resources>
+</Application>

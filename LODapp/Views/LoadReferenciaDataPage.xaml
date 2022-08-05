@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:viewmodel="clr-namespace:LODapp.ViewModels"
+             x:Class="LODapp.Views.LoadReferenciaDataPage"
+              x:Name="LoadRefDataPages"
+             Shell.FlyoutBehavior="Disabled"
+              xmlns:local="clr-namespace:LODapp.Resources"
+             Shell.NavBarIsVisible="False"
+             x:DataType="viewmodel:LoadReferenciaAnotacionViewModel">
+    <ContentPage.BindingContext>
+        <viewmodel:LoadReferenciaAnotacionViewModel/>
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <StackLayout>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="45*" />
+                    <RowDefinition Height="20*" />
+                    <RowDefinition Height="20*" />
+                </Grid.RowDefinitions>
+                <StackLayout Grid.Row="0"></StackLayout>
+                <ActivityIndicator Grid.Row="1" IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" BackgroundColor="Transparent" Color="Orange"/>
+                <Frame Grid.Row="2" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="30*"></ColumnDefinition>
+                            <ColumnDefinition Width="70*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Image Grid.Row="0" Grid.Column="0" Source="{local:ImageResource LODapp.Content.Images.Logo_APR.png}" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"/>
+                        <Label Grid.Row="0" Grid.Column="1" TextColor="Black" Text="Estamos sincronizando la aplicación, esto podría tardar unos minutos..."
+                        VerticalOptions="CenterAndExpand" 
+                        HorizontalOptions="CenterAndExpand" />
+                    </Grid>
+                </Frame>
+
+            </Grid>
+        </StackLayout>
+
+    </ContentPage.Content>
+</ContentPage>

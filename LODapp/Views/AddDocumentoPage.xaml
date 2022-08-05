@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:viewmodels="clr-namespace:LODapp.ViewModels"
+             x:Class="LODapp.Views.AddDocumentoPage"
+             xmlns:local="clr-namespace:LODapp.Resources" xmlns:viewmodels1="clr-namespace:LODapp.Models"
+             x:Name="AddAnotPage"
+             xmlns:fontAwesome="clr-namespace:FontAwesome"
+             x:DataType="viewmodels:AddDocumentoViewModel"
+             Title="Añadir Documento">
+    <Shell.BackButtonBehavior>
+        <BackButtonBehavior Command="{Binding BackCommand}"/>
+    </Shell.BackButtonBehavior>
+    <ContentPage.BindingContext>
+        <viewmodels:AddDocumentoViewModel/>
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <Frame Padding="20">
+            <StackLayout>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Image Grid.Row="0" Grid.Column="0" HeightRequest="40" WidthRequest="40" Source="{local:ImageResource LODapp.Content.Images.fileuploadGeneric.png}" />
+                    <Label Text="Añadir Documento" TextColor="Black" FontAttributes="Bold" FontSize="Medium" Grid.Column="2" Grid.ColumnSpan="3" Grid.Row="0"/>
+
+
+
+                    <Label Text="Nombre Documento:" TextColor="Black" FontAttributes="Bold" FontSize="Small" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="4"/>
+                    <Entry Text="{Binding TituloDocumento}" TextColor="Black" Placeholder="Título" PlaceholderColor="LightGray" FontSize="Small" Grid.Column="0" Grid.ColumnSpan="4" Grid.Row="5"/>
+                    <Label Text="Observación:" TextColor="Black" FontAttributes="Bold" FontSize="Small" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="6"/>
+                    <Editor Text="{Binding ObservacionDoc}" TextColor="Black" Placeholder="Cuerpo" PlaceholderColor="LightGray" FontSize="Small" Grid.Column="0" Grid.ColumnSpan="4" Grid.Row="7"/>
+
+                    <Label Text="Seleccione Archivo:" TextColor="Black" FontAttributes="Bold" FontSize="Small" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="10"/>
+                    <Button Text="{x:Static fontAwesome:FontAwesomeIcons.Upload}" FontFamily="FAS" CornerRadius="10" Command="{Binding UploadArchiveCommand}" BackgroundColor="LightGray" TextColor="Black" FontSize="Large" Grid.Column="1" Grid.ColumnSpan="4" Grid.Row="11"/>
+                    <Button Text="{x:Static fontAwesome:FontAwesomeIcons.CameraRetro}" FontFamily="FAS" CornerRadius="10" Command="{Binding TakePhotoCommand}" BackgroundColor="LightGray" TextColor="Black" FontSize="Large" Grid.Column="0" Grid.ColumnSpan="1" Grid.Row="11"/>
+                    <Label Text="{Binding FileName}" TextColor="Black" FontAttributes="Bold" FontSize="Micro" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="12"/>
+                </Grid>
+                <Button Text="Crear" CornerRadius="10" TextColor="White" BackgroundColor="Green" Command="{Binding CreateDocumentoCommand}"/>
+            </StackLayout>
+        </Frame>
+    </ContentPage.Content>
+</ContentPage>

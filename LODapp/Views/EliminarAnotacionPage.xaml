@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:viewmodels="clr-namespace:LODapp.ViewModels"
+             x:Class="LODapp.Views.EliminarAnotacionPage"
+             x:DataType="viewmodels:EliminarAnotacionViewModel"
+             Title="Eliminar Anotación">
+    <Shell.BackButtonBehavior>
+        <BackButtonBehavior Command="{Binding BackCommand}"/>
+    </Shell.BackButtonBehavior>
+    <ContentPage.BindingContext>
+        <viewmodels:EliminarAnotacionViewModel/>
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <StackLayout>
+            <Label Text="¿Desea Eliminar este Borrador?"
+                   FontSize="Medium"
+                TextColor="Black" FontAttributes="Bold"/>
+            <Button Text="Si, Eliminar" TextColor="White" CornerRadius="10" BackgroundColor="Red" Command="{Binding EliminarAnotacionCommand}"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
